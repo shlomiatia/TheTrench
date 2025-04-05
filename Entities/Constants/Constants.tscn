@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3erpntxxxwam"]
+
+[ext_resource type="Script" path="res://Entities/Constants/constants.gd" id="1_633lc"]
+
+[node name="Constants" type="Node2D"]
+script = ExtResource("1_633lc")

@@ -33,7 +33,7 @@ offset_bottom = 88360.0
 texture = SubResource("GradientTexture2D_uftau")
 
 [node name="Submarine" parent="." instance=ExtResource("1_gib7k")]
-position = Vector2(327, 8)
+position = Vector2(1936, 1409)
 motion_mode = 1
 
 [node name="Geometry" parent="." instance=ExtResource("2_ytqlx")]
