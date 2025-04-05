@@ -11,27 +11,36 @@ func _physics_process(delta: float) -> void:
     if direction.y > 0:
         is_diving = true
 
+    if global_position.x < 400:
+        direction = Vector2(1.0, direction.y).normalized()
+        velocity.x = Constants.max_speed
+    elif global_position.x > 20000:
+        direction = Vector2(-1.0, direction.y).normalized()
+        velocity.x = - Constants.max_speed
+
     if !is_diving && global_position.y == 0 && direction.y <= 0.0:
          direction = Vector2(direction.x, 0.0)
          velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), velocity.y)
-         if direction.x > 0.0:
-            sprite_2d.scale = Vector2(1.0, 1.0)
-         elif direction.x < 0.0:
-            sprite_2d.scale = Vector2(-1.0, 1.0)
+         if velocity.x > 0.0:
+            rotation = 0.0
+            scale = Vector2(1.0, 1.0)
+         elif velocity.x < 0.0:
+            rotation = - PI
+            scale = Vector2(1.0, -1.0)
     elif global_position.y < 0.0:
         direction = Vector2(direction.x, 0.0)
         velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), velocity.y)
         velocity += get_gravity() * delta
     else:
-        sprite_2d.scale = Vector2.ONE
         velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), get_velocity_component(direction.y, velocity.y, delta))
-        
+
     if is_diving:
         hande_rotation_and_scale(direction, delta)
+
     move_and_slide()
     handle_light()
     
-    $Label.text = "%s,%s,%s,%s" % [global_position.y, direction.y, scale.x, scale.y]
+    $Label.text = "%s" % [floor(global_position.x)]
 
 func hande_rotation_and_scale(direction: Vector2, delta: float) -> void:
     if (global_position.y == 0.0):
