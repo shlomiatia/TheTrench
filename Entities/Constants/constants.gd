@@ -4,8 +4,9 @@ extends Node2D
 # 11000/2.5/60 = 73
 # 1m = 8 pixels
 var max_speed: float = 584.0 # 73 m/s
-var acceleration: float = 36.0
-var deceleration: float = 262.0
+var acceleration: float = 292.0
+var deceleration: float = 1168.0
+var rotation_speed = 90.0
 var twilight_start: float = 1600.0 # 200m * 8
 var twilight_end: float = 8000.0 # 1000m * 8
 
@@ -15,16 +16,16 @@ var current_property_index: int = 0
 var properties: Array = []
 
 var timer = 0
-var input_sequence = []
-var cheat_easy_mode = [KEY_I, KEY_D, KEY_D, KEY_Q, KEY_D]
-var cheat_power_mode = [KEY_I, KEY_D, KEY_K, KEY_F, KEY_A]
-var sequence_timeout = 1.0
+const is_disabled = false
 
 func _ready():
+    if is_disabled:
+        return
     properties = [
         "max_speed",
         "acceleration",
         "deceleration",
+        "rotation_speed"
     ]
     
     setup_ui()
@@ -43,6 +44,8 @@ func setup_ui():
 
 
 func _input(event: InputEvent):
+    if is_disabled:
+        return
     if event.is_action_pressed("ui_right"):
         current_property_index = (current_property_index + 1) % properties.size()
         update_display()
@@ -71,6 +74,8 @@ func arrays_match(arr1, arr2):
     return true
     
 func _process(delta: float) -> void:
+    if is_disabled:
+        return
     if Input.is_action_pressed("ui_up"):
         timer += delta
         print(timer)
