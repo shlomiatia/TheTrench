@@ -4,20 +4,38 @@ class_name Submarine extends CharacterBody2D
 @onready var canvas_modulate: CanvasModulate = $/root/Game/CanvasModulate
 @onready var beam_light_2d: PointLight2D = $Sprite2D/BeamLight2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
-
+var is_diving = false
 
 func _physics_process(delta: float) -> void:
-    var direction = Input.get_vector("Left", "Right", "Up", "Down")
+    var direction := Input.get_vector("Left", "Right", "Up", "Down")
+    if direction.y > 0:
+        is_diving = true
 
-    hande_rotation_and_scale(direction, delta)
-    velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), get_velocity_component(direction.y, velocity.y, delta))
+    if !is_diving && global_position.y == 0 && direction.y <= 0.0:
+         direction = Vector2(direction.x, 0.0)
+         velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), velocity.y)
+         if direction.x > 0.0:
+            sprite_2d.scale = Vector2(1.0, 1.0)
+         elif direction.x < 0.0:
+            sprite_2d.scale = Vector2(-1.0, 1.0)
+    elif global_position.y < 0.0:
+        direction = Vector2(direction.x, 0.0)
+        velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), velocity.y)
+        velocity += get_gravity() * delta
+    else:
+        sprite_2d.scale = Vector2.ONE
+        velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), get_velocity_component(direction.y, velocity.y, delta))
+        
+    if is_diving:
+        hande_rotation_and_scale(direction, delta)
     move_and_slide()
     handle_light()
     
-    $Label.text = "%s,%s=%s" % [floor(velocity.x), floor(velocity.y), floor(velocity.length())]
-    #$Label.text = "%s,%s" % [floor(position.y), canvas_modulate.color.r]
+    $Label.text = "%s,%s,%s,%s" % [global_position.y, direction.y, scale.x, scale.y]
 
 func hande_rotation_and_scale(direction: Vector2, delta: float) -> void:
+    if (global_position.y == 0.0):
+        return
     if direction == Vector2.ZERO:
         return
     var target_angle = direction.angle()
@@ -32,9 +50,9 @@ func hande_rotation_and_scale(direction: Vector2, delta: float) -> void:
 
     if absf(rotation_degrees) != 90.0:
         if rotation_degrees > -90 and rotation_degrees < 90:
-            sprite_2d.scale.y = abs(sprite_2d.scale.y)
+            scale = Vector2(1.0, abs(scale.y))
         else:
-            sprite_2d.scale.y = - abs(sprite_2d.scale.y)
+            scale = Vector2(1.0, -abs(scale.y))
 
 func handle_light() -> void:
     var darkness = clampf(lerpf(0.0, 1.0, (position.y - Constants.twilight_start) / (Constants.twilight_end - Constants.twilight_start)), 0.0, 1.0)
