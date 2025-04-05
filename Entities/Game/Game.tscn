@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtdlxrbpbm0o1"]
+[gd_scene load_steps=7 format=3 uid="uid://dtdlxrbpbm0o1"]
 
 [ext_resource type="PackedScene" uid="uid://dp6qj52hax3qu" path="res://Entities/Submarine/Submarine.tscn" id="1_gib7k"]
+[ext_resource type="PackedScene" uid="uid://btg8odlgpiln0" path="res://Entities/Geometry/Geometry.tscn" id="2_ytqlx"]
 
 [sub_resource type="Gradient" id="Gradient_4vc5h"]
 colors = PackedColorArray(0.211765, 0.772549, 0.956863, 1, 0.427451, 0.917647, 0.839216, 1)
@@ -28,9 +29,13 @@ texture = SubResource("GradientTexture1D_ydgye")
 
 [node name="Ocean" type="TextureRect" parent="."]
 offset_right = 20400.0
-offset_bottom = 88000.0
+offset_bottom = 88360.0
 texture = SubResource("GradientTexture2D_uftau")
 
 [node name="Submarine" parent="." instance=ExtResource("1_gib7k")]
-position = Vector2(10200, 0)
+position = Vector2(327, 8)
 motion_mode = 1
+
+[node name="Geometry" parent="." instance=ExtResource("2_ytqlx")]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(1600, 1600, 3200, 31600, 4800, 32000, 9000, 32000, 9680, 88000, 10320, 88000, 11000, 32000, 20400, 32000, 20400, 88360, 0, 88360, 0, 1200)

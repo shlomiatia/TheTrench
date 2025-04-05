@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://btg8odlgpiln0"]
+
+[ext_resource type="Script" path="res://Entities/Geometry/geometry.gd" id="1_c31sv"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6kfgr"]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
+
+[node name="Geometry" type="Polygon2D"]
+script = ExtResource("1_c31sv")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_6kfgr")
