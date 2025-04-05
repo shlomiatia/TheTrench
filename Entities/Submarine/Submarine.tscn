@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp6qj52hax3qu"]
+[gd_scene load_steps=6 format=3 uid="uid://cd3cwy7bm1rle"]
 
 [ext_resource type="Script" path="res://Entities/Submarine/submarine.gd" id="1_t4wht"]
 [ext_resource type="Texture2D" uid="uid://bs0bgsfokary1" path="res://Textures/Submarine.png" id="1_uth5l"]
+[ext_resource type="Texture2D" uid="uid://bqijme8n4ex7w" path="res://Textures/Light.png" id="3_b0es2"]
+[ext_resource type="Texture2D" uid="uid://rhx1vmo4vx1j" path="res://Textures/Beam.png" id="4_pm8hu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8l2s"]
 radius = 8.0
@@ -9,6 +11,14 @@ height = 46.0
 
 [node name="Submarine" type="CharacterBody2D"]
 script = ExtResource("1_t4wht")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -68.0
+offset_top = -94.0
+offset_right = 380.0
+offset_bottom = 136.0
+color = Color(0.521569, 0, 1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, 5)
@@ -18,8 +28,18 @@ shape = SubResource("CapsuleShape2D_i8l2s")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_uth5l")
 
+[node name="BeamLight2D" type="PointLight2D" parent="Sprite2D"]
+energy = 0.0
+shadow_enabled = true
+texture = ExtResource("4_pm8hu")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.0
+shadow_enabled = true
+texture = ExtResource("3_b0es2")

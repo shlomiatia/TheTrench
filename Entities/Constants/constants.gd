@@ -1,10 +1,13 @@
 extends Node2D
 
 # Mariana tenrch is 11km, and the jurney took 2.5 h
-# 11000/2.5/80 = 73
+# 11000/2.5/60 = 73
+# 1m = 8 pixels
 var max_speed: float = 584.0 # 73 m/s
 var acceleration: float = 36.0
 var deceleration: float = 262.0
+var twilight_start: float = 1600.0 # 200m * 8
+var twilight_end: float = 8000.0 # 1000m * 8
 
 var canvas_layer: CanvasLayer
 var display_label: Label
