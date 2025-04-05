@@ -10,6 +10,15 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
+config/name="TheTrench"
+run/main_scene="res://Entities/Game/Game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/mode=2
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"

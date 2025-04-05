@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp6qj52hax3qu"]
+
+[ext_resource type="Script" path="res://Entities/Submarine/submarine.gd" id="1_t4wht"]
+[ext_resource type="Texture2D" uid="uid://bs0bgsfokary1" path="res://Textures/Submarine.png" id="1_uth5l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8l2s"]
+radius = 8.0
+height = 46.0
+
+[node name="Submarine" type="CharacterBody2D"]
+script = ExtResource("1_t4wht")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_i8l2s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uth5l")
+
+[node name="Camera2D" type="Camera2D" parent="."]
