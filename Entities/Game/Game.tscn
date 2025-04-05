@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtdlxrbpbm0o1"]
+[gd_scene load_steps=9 format=3 uid="uid://dtdlxrbpbm0o1"]
 
 [ext_resource type="PackedScene" uid="uid://cd3cwy7bm1rle" path="res://Entities/Submarine/Submarine.tscn" id="1_gib7k"]
 [ext_resource type="PackedScene" uid="uid://btg8odlgpiln0" path="res://Entities/Geometry/Geometry.tscn" id="2_ytqlx"]
 [ext_resource type="PackedScene" uid="uid://dqt4yl7l4330w" path="res://Entities/Sonar/Sonar.tscn" id="3_6p7tm"]
+[ext_resource type="PackedScene" uid="uid://ww5pt2cdukcn" path="res://Entities/Measurements/Measurements.tscn" id="4_ouh1b"]
 
 [sub_resource type="Gradient" id="Gradient_4vc5h"]
 colors = PackedColorArray(0.211765, 0.772549, 0.956863, 1, 0.427451, 0.917647, 0.839216, 1)
@@ -27,11 +28,11 @@ fill_to = Vector2(0.5, 0)
 
 [node name="Sky" type="TextureRect" parent="."]
 offset_top = -360.0
-offset_right = 20400.0
+offset_right = 10400.0
 texture = SubResource("GradientTexture1D_ydgye")
 
 [node name="Ocean" type="TextureRect" parent="."]
-offset_right = 20400.0
+offset_right = 10400.0
 offset_bottom = 44360.0
 texture = SubResource("GradientTexture2D_uftau")
 
@@ -40,6 +41,18 @@ position = Vector2(640, 0)
 
 [node name="Geometry" parent="." instance=ExtResource("2_ytqlx")]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(1600, 1600, 3200, 20800, 4800, 22400, 17480, 24000, 17550, 44000, 17800, 44000, 18050, 44000, 18120, 24000, 19077.9, 12000, 19667, 11897, 20400, 24000, 20400, 44360, 0, 44360, 0, 1200)
+polygon = PackedVector2Array(1600, 1600, 3200, 20800, 4800, 22400, 8740, 24000, 8775, 44000, 8900, 44000, 9025, 44000, 9060, 24000, 9538.95, 12000, 10000, 11897, 10400, 24000, 10400, 44360, 0, 44360, 0, 1200)
 
 [node name="Sonar" parent="." instance=ExtResource("3_6p7tm")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Measurements" parent="CanvasLayer" instance=ExtResource("4_ouh1b")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -85.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 41.0
+grow_horizontal = 0

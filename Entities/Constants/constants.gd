@@ -1,8 +1,8 @@
 extends Node2D
 
-# Mariana tenrch is 11km, and the jurney took 2.5 h
+# Mariana tenrch is 11km, and the journey took 2.5 h
 # 11000/2.5/60 = 73
-# 1m = 8 pixels
+# 1m = 4 pixels
 var max_speed: float = 292.0 # 73 m/s
 var acceleration: float = 146.0
 var deceleration: float = 584.0
@@ -16,7 +16,7 @@ var current_property_index: int = 0
 var properties: Array = []
 
 var timer = 0
-const is_disabled = false
+const is_disabled = true
 
 func _ready():
     if is_disabled:

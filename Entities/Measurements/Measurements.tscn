@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ww5pt2cdukcn"]
+
+[ext_resource type="StyleBox" uid="uid://8l2j0jg6rkrg" path="res://Entities/Measurements/panel.tres" id="1_1eqfr"]
+[ext_resource type="Script" path="res://Entities/Measurements/measurements.gd" id="2_0aiy8"]
+[ext_resource type="Theme" uid="uid://bctepfpor8lac" path="res://Entities/Measurements/font.tres" id="2_o72hh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xu6as"]
+content_margin_left = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oqcct"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+
+[node name="Measurements" type="PanelContainer"]
+offset_right = 69.0
+offset_bottom = 31.0
+theme_override_styles/panel = ExtResource("1_1eqfr")
+script = ExtResource("2_0aiy8")
+
+[node name="DepthLabel" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_o72hh")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xu6as")
+text = "Depth:"
+
+[node name="DepthValue" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_o72hh")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oqcct")
+text = "10100 m"
