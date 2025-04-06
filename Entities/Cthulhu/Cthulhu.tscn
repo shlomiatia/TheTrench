@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgk72ry3wkbxd"]
+
+[ext_resource type="Texture2D" uid="uid://c03w05mcgei57" path="res://Textures/eyeblack.png" id="1_cp2xc"]
+[ext_resource type="Script" path="res://Entities/Cthulhu/cthulhu.gd" id="1_x1ls1"]
+[ext_resource type="Texture2D" uid="uid://c7buhef8ktrdd" path="res://Textures/eyewhite.png" id="2_1kfqk"]
+[ext_resource type="Texture2D" uid="uid://bsk5wm6bg4jnk" path="res://Textures/eyered.png" id="3_lfdw4"]
+[ext_resource type="AudioStream" uid="uid://d1xo0lobjubnc" path="res://Sounds/cthulhu.mp3" id="5_yqy7g"]
+
+[sub_resource type="Animation" id="Animation_qinyi"]
+resource_name = "OpenEyes"
+length = 7.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(386, 350), Vector2(386, 0)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_yqy7g")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_7tdc8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(386, 350)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a8fv7"]
+_data = {
+"OpenEyes": SubResource("Animation_qinyi"),
+"RESET": SubResource("Animation_7tdc8")
+}
+
+[node name="Cthulhu" type="Node2D"]
+script = ExtResource("1_x1ls1")
+
+[node name="EyesWhite" type="Sprite2D" parent="."]
+texture = ExtResource("2_1kfqk")
+
+[node name="EyesRed" type="Sprite2D" parent="."]
+texture = ExtResource("3_lfdw4")
+
+[node name="EyesBlack" type="Sprite2D" parent="."]
+texture = ExtResource("1_cp2xc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -184.0
+offset_top = -177.0
+offset_right = 202.0
+offset_bottom = 173.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a8fv7")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

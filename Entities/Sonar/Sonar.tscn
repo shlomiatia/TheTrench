@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqt4yl7l4330w"]
+[gd_scene load_steps=7 format=3 uid="uid://dqt4yl7l4330w"]
 
 [ext_resource type="Script" path="res://Entities/Sonar/sonar.gd" id="1_kcv3t"]
+[ext_resource type="AudioStream" uid="uid://bkrrp7ralxt8c" path="res://Sounds/ping.wav" id="2_fovkg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0vxu8"]
 light_mode = 1
@@ -75,3 +76,6 @@ outline_color = Color(0.65098, 0.796078, 0.588235, 1)
 libraries = {
 "": SubResource("AnimationLibrary_xmrum")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_fovkg")

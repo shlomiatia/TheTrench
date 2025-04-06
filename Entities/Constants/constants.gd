@@ -12,7 +12,7 @@ var twilight_end: float = 8000.0 # 1000m * 8
 var fish_min_speed: float = 20.0
 var fish_max_speed: float = 40.0
 var left_play_area: float = 400;
-var right_play_area: float = 20000;
+var right_play_area: float = 10000;
 
 var canvas_layer: CanvasLayer
 var display_label: Label

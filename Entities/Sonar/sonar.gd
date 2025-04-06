@@ -12,6 +12,7 @@ var ping_scene: PackedScene
 var current_ping: Ping
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var submarine: Submarine = $/root/Game/Submarine
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 func _ready() -> void:
     skip_next.resize(SEGMENTS + 1)
@@ -29,6 +30,7 @@ func ping(ping_global_position: Vector2) -> void:
     get_tree().current_scene.add_child(current_ping)
     global_position = ping_global_position
     animation_player.play("Sonar")
+    audio_stream_player.play()
 
     for i in skip.size():
         skip_next[i] = false

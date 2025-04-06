@@ -5,7 +5,7 @@ var fish_scene: PackedScene = preload("res://Entities/Fish/Fish.tscn")
 
 var spawn_infos = [
     {"textures": [preload("res://Textures/fish1.png"), preload("res://Textures/fish2.png"), preload("res://Textures/fish3.png")], "count_per_screen": 32, "depth": 0},
-    {"textures": [preload("res://Textures/whale1.png")], "count_per_screen": 1, "depth": 200},
+    {"textures": [preload("res://Textures/whale1.png")], "count_per_screen": 1, "depth": 165},
     {"textures": [preload("res://Textures/shark.png")], "count_per_screen": 3, "depth": 1000},
     {"textures": [preload("res://Textures/whale2.png")], "count_per_screen": 2, "depth": 2000},
     {"textures": [preload("res://Textures/fish4.png"), preload("res://Textures/fish5.png"), preload("res://Textures/fish6.png")], "count_per_screen": 16, "depth": 3000},
@@ -13,7 +13,7 @@ var spawn_infos = [
 var spawn_info_index = 0
 
 const width: float = 640.0
-const height: float = 360.0 
+const height: float = 360.0
 
 var screen_offsets: Array[Vector2] = [
     Vector2(-width, height),

@@ -16,13 +16,13 @@ var texts = [
     {"text": "Reached the trench opening", "depth": 6000},
     {"text": "Reached 8,848m, the height of mount Everest", "depth": 8848},
     {"text": "Reached 10,000m, commercial airplanes cruise at this height", "depth": 10000},
-    {"text": "Reached the trench ennd", "depth": 10950}
+    {"text": "Reached the trench end", "depth": 10950}
 ]
 
-var text_index = 0
+var text_index = 7
 
 func _ready() -> void:
-    animation_player.animation_finished.connect(func(anim: String): if anim != "RESET": $/root/Game.continue_intro())
+    animation_player.animation_finished.connect(animation_ended)
 
 func _process(delta: float) -> void:
     if visible_characters != -1 && visible_characters < text.length():
@@ -46,3 +46,12 @@ func display_text(test_to_display: String) -> void:
     visible_characters = 0
     timer = 0.0
     animation_player.play("RESET")
+
+func animation_ended(anim: String):
+    prints(anim, text_index)
+    if anim != "RESET":
+        if text_index == 0:
+            $/root/Game.continue_intro()
+        elif text_index == texts.size():
+            print($/root/Game/Cthulhu)
+            $/root/Game/Cthulhu.awake()

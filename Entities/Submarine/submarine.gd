@@ -8,7 +8,7 @@ class_name Submarine extends CharacterBody2D
 @onready var dialog: Dialog = $/root/Game/CanvasLayer/Dialog
 
 var is_diving = false
-var can_move = false
+var can_move = true
 
 func _physics_process(delta: float) -> void:
     if !can_move:

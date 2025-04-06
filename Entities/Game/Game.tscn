@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dtdlxrbpbm0o1"]
+[gd_scene load_steps=22 format=3 uid="uid://dtdlxrbpbm0o1"]
 
 [ext_resource type="Script" path="res://Entities/Game/game.gd" id="1_eymi4"]
 [ext_resource type="PackedScene" uid="uid://cd3cwy7bm1rle" path="res://Entities/Submarine/Submarine.tscn" id="1_gib7k"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ww5pt2cdukcn" path="res://Entities/Measurements/Measurements.tscn" id="4_ouh1b"]
 [ext_resource type="FontFile" uid="uid://7gtb4py1cha5" path="res://Fonts/advanced_pixel-7.ttf" id="5_0tvjc"]
 [ext_resource type="PackedScene" uid="uid://dfhl4ptsutwcf" path="res://Entities/Dialog/Dialog.tscn" id="5_jvhip"]
+[ext_resource type="PackedScene" uid="uid://cgk72ry3wkbxd" path="res://Entities/Cthulhu/Cthulhu.tscn" id="7_6wc7f"]
 
 [sub_resource type="Gradient" id="Gradient_4vc5h"]
 colors = PackedColorArray(0.211765, 0.772549, 0.956863, 1, 0.427451, 0.917647, 0.839216, 1)
@@ -19,13 +20,21 @@ colors = PackedColorArray(0.211765, 0.772549, 0.956863, 1, 0.427451, 0.917647, 0
 gradient = SubResource("Gradient_4vc5h")
 
 [sub_resource type="Gradient" id="Gradient_vn08f"]
-offsets = PackedFloat32Array(0, 0.91, 0.98, 1)
-colors = PackedColorArray(0.172549, 0.117647, 0.192157, 1, 0.172549, 0.117647, 0.192157, 1, 0.219608, 0.34902, 0.701961, 1, 0.2, 0.533333, 0.870588, 1)
+offsets = PackedFloat32Array(0, 0.186147, 0.91, 0.98, 1)
+colors = PackedColorArray(0.0627451, 0.0705882, 0.109804, 1, 0.172549, 0.117647, 0.192157, 1, 0.172549, 0.117647, 0.192157, 1, 0.219608, 0.34902, 0.701961, 1, 0.2, 0.533333, 0.870588, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_uftau"]
 gradient = SubResource("Gradient_vn08f")
 width = 256
 height = 256
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_4ikqs"]
+colors = PackedColorArray(0, 0, 0, 1, 0.0627451, 0.0705882, 0.109804, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j2337"]
+gradient = SubResource("Gradient_4ikqs")
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
@@ -164,7 +173,7 @@ position = Vector2(534, -115)
 texture = ExtResource("3_2iioh")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Parallax2D"]
-position = Vector2(21, -143)
+position = Vector2(17, -136)
 texture = ExtResource("4_h2thc")
 
 [node name="Ocean" type="TextureRect" parent="."]
@@ -173,14 +182,24 @@ offset_right = 10400.0
 offset_bottom = 44360.0
 texture = SubResource("GradientTexture2D_uftau")
 
+[node name="Ocean2" type="TextureRect" parent="."]
+offset_left = 8575.0
+offset_top = 43296.0
+offset_right = 9215.0
+offset_bottom = 43656.0
+texture = SubResource("GradientTexture2D_j2337")
+
 [node name="SpawnFish" parent="." instance=ExtResource("2_epefs")]
 
+[node name="Cthulhu" parent="." instance=ExtResource("7_6wc7f")]
+position = Vector2(8895, 43822)
+
 [node name="Submarine" parent="." instance=ExtResource("1_gib7k")]
-position = Vector2(640, 0)
+position = Vector2(8895, 43000)
 
 [node name="Geometry" parent="." instance=ExtResource("2_ytqlx")]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(1600, 1600, 3200, 20800, 4800, 22400, 8740, 24000, 8775, 44000, 8900, 44000, 9025, 44000, 9060, 24000, 9538.95, 12000, 10000, 11897, 10400, 24000, 10400, 44360, 0, 44360, 0, 1200)
+polygon = PackedVector2Array(1600, 1600, 3200, 20800, 4800, 22400, 8740, 24000, 8776, 43646, 8745, 43684, 8719, 43744, 8701, 43813, 8728, 43893, 8755, 43949, 8775, 43981, 8834, 43994, 8909, 44001, 8981, 43997, 9023, 43981, 9054, 43940, 9078, 43869, 9088, 43808, 9073, 43751, 9041, 43689, 8994, 43656, 9060, 24000, 9801, 6848, 10244, 5651, 10400, 24000, 10400, 44360, 0, 44360, 0, 1200)
 
 [node name="Sonar" parent="." instance=ExtResource("3_6p7tm")]
 
