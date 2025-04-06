@@ -53,6 +53,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"allow_input"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_uu6v7"]
 length = 0.001
@@ -134,14 +148,13 @@ autowrap_mode = 2
 
 [node name="Logo" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
-offset_left = 496.0
+offset_left = 480.0
 offset_top = -138.0
-offset_right = 784.0
-offset_bottom = -66.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 0
+offset_right = 800.0
+offset_bottom = -58.0
+theme_override_colors/font_color = Color(0.0627451, 0.0705882, 0.109804, 1)
 theme_override_fonts/font = ExtResource("5_0tvjc")
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 80
 text = "THE TRENCH"
 
 [node name="Instructions" type="Label" parent="."]

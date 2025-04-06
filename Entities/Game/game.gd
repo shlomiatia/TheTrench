@@ -14,5 +14,8 @@ func _process(_delta: float) -> void:
 func continue_intro() -> void:
     if !was_intro_continued:
         was_intro_continued = true
-        $/root/Game/Submarine.can_move = true
+        
         animation_player.play("ContinueIntro")
+
+func allow_input() -> void:
+    $/root/Game/Submarine.can_move = true

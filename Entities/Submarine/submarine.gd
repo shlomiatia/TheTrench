@@ -5,6 +5,7 @@ class_name Submarine extends CharacterBody2D
 @onready var beam_light_2d: PointLight2D = $Sprite2D/BeamLight2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var dialog: Dialog = $/root/Game/CanvasLayer/Dialog
 
 var is_diving = false
 var can_move = false
@@ -13,17 +14,29 @@ func _physics_process(delta: float) -> void:
     if !can_move:
         return
     var direction := Input.get_vector("Left", "Right", "Up", "Down")
+
     if direction.y > 0 && !is_diving:
         is_diving = true
         audio_stream_player.stream = preload("res://Sounds/water.wav")
         audio_stream_player.play()
 
+    if is_on_floor():
+        direction = get_floor_normal()
+        velocity = direction * Constants.max_speed
+        if !audio_stream_player.playing:
+            audio_stream_player.stream = preload("res://Sounds/hit.wav")
+            audio_stream_player.play()
+
     if global_position.x < 400:
         direction = Vector2(1.0, direction.y).normalized()
         velocity.x = Constants.max_speed
+        if !dialog.is_playing:
+            dialog.display_text("The trench is on the other side")
     elif global_position.x > 20000:
         direction = Vector2(-1.0, direction.y).normalized()
         velocity.x = - Constants.max_speed
+        if !dialog.is_playing:
+            dialog.display_text("The trench is on the other side")
 
     if !is_diving && global_position.y == 0 && direction.y <= 0.0:
          direction = Vector2(direction.x, 0.0)
@@ -44,9 +57,7 @@ func _physics_process(delta: float) -> void:
     if is_diving:
         hande_rotation_and_scale(direction, delta)
 
-    if move_and_slide() && !audio_stream_player.playing:
-        audio_stream_player.stream = preload("res://Sounds/hit.wav")
-        audio_stream_player.play()
+    move_and_slide()
     handle_light()
     
     $Label.text = "%s" % [floor(global_position.x)]
