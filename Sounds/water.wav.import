@@ -2,12 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dhd0eirsh5203"
-valid=false
+uid="uid://ckdgqmgbbtmqo"
+path="res://.godot/imported/water.wav-4172bc516de23dfaa7db15fb1ec6724b.sample"
 
 [deps]
 
-source_file="res://Sounds/chtulu.wav"
+source_file="res://Sounds/water.wav"
+dest_files=["res://.godot/imported/water.wav-4172bc516de23dfaa7db15fb1ec6724b.sample"]
 
 [params]
 

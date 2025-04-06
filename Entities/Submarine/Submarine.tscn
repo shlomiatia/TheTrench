@@ -38,3 +38,5 @@ offset_bottom = 23.0
 energy = 0.0
 shadow_enabled = true
 texture = ExtResource("3_b0es2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

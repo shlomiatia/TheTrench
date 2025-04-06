@@ -4,12 +4,19 @@ class_name Submarine extends CharacterBody2D
 @onready var canvas_modulate: CanvasModulate = $/root/Game/CanvasModulate
 @onready var beam_light_2d: PointLight2D = $Sprite2D/BeamLight2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
 var is_diving = false
+var can_move = false
 
 func _physics_process(delta: float) -> void:
+    if !can_move:
+        return
     var direction := Input.get_vector("Left", "Right", "Up", "Down")
-    if direction.y > 0:
+    if direction.y > 0 && !is_diving:
         is_diving = true
+        audio_stream_player.stream = preload("res://Sounds/water.wav")
+        audio_stream_player.play()
 
     if global_position.x < 400:
         direction = Vector2(1.0, direction.y).normalized()
@@ -37,7 +44,9 @@ func _physics_process(delta: float) -> void:
     if is_diving:
         hande_rotation_and_scale(direction, delta)
 
-    move_and_slide()
+    if move_and_slide() && !audio_stream_player.playing:
+        audio_stream_player.stream = preload("res://Sounds/hit.wav")
+        audio_stream_player.play()
     handle_light()
     
     $Label.text = "%s" % [floor(global_position.x)]

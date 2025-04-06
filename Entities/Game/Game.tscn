@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtdlxrbpbm0o1"]
+[gd_scene load_steps=15 format=3 uid="uid://dtdlxrbpbm0o1"]
 
+[ext_resource type="Script" path="res://Entities/Game/game.gd" id="1_eymi4"]
 [ext_resource type="PackedScene" uid="uid://cd3cwy7bm1rle" path="res://Entities/Submarine/Submarine.tscn" id="1_gib7k"]
 [ext_resource type="PackedScene" uid="uid://btg8odlgpiln0" path="res://Entities/Geometry/Geometry.tscn" id="2_ytqlx"]
 [ext_resource type="PackedScene" uid="uid://dqt4yl7l4330w" path="res://Entities/Sonar/Sonar.tscn" id="3_6p7tm"]
 [ext_resource type="PackedScene" uid="uid://ww5pt2cdukcn" path="res://Entities/Measurements/Measurements.tscn" id="4_ouh1b"]
 [ext_resource type="FontFile" uid="uid://7gtb4py1cha5" path="res://Fonts/advanced_pixel-7.ttf" id="5_0tvjc"]
+[ext_resource type="PackedScene" uid="uid://dfhl4ptsutwcf" path="res://Entities/Dialog/Dialog.tscn" id="5_jvhip"]
 
 [sub_resource type="Gradient" id="Gradient_4vc5h"]
 colors = PackedColorArray(0.211765, 0.772549, 0.956863, 1, 0.427451, 0.917647, 0.839216, 1)
@@ -23,7 +25,70 @@ height = 256
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
+[sub_resource type="Animation" id="Animation_fwd4m"]
+resource_name = "ContinueIntro"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Instructions:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uu6v7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Instructions:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pc44c"]
+_data = {
+"ContinueIntro": SubResource("Animation_fwd4m"),
+"RESET": SubResource("Animation_uu6v7")
+}
+
 [node name="Game" type="Node2D"]
+script = ExtResource("1_eymi4")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
@@ -60,12 +125,38 @@ offset_right = -10.0
 offset_bottom = 41.0
 grow_horizontal = 0
 
+[node name="Dialog" parent="CanvasLayer" instance=ExtResource("5_jvhip")]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -94.0
+offset_bottom = 10.0
+autowrap_mode = 2
+
 [node name="Logo" type="Label" parent="."]
-offset_left = 505.0
+modulate = Color(1, 1, 1, 0)
+offset_left = 496.0
 offset_top = -138.0
-offset_right = 793.0
+offset_right = 784.0
 offset_bottom = -66.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("5_0tvjc")
 theme_override_font_sizes/font_size = 72
 text = "THE TRENCH"
+
+[node name="Instructions" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 576.0
+offset_top = -63.0
+offset_right = 705.0
+offset_bottom = -32.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("5_0tvjc")
+theme_override_font_sizes/font_size = 30
+text = "WASD to move"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pc44c")
+}

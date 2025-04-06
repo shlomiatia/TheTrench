@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfhl4ptsutwcf"]
+
+[ext_resource type="Script" path="res://Entities/Dialog/dialog.gd" id="1_h5j5u"]
+[ext_resource type="FontFile" uid="uid://7gtb4py1cha5" path="res://Fonts/advanced_pixel-7.ttf" id="1_kc481"]
+[ext_resource type="AudioStream" uid="uid://c4xv22yullwux" path="res://Sounds/type.wav" id="3_u6a13"]
+
+[sub_resource type="Animation" id="Animation_0s72s"]
+resource_name = "FadeOut"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fpi02"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x6ee7"]
+_data = {
+"FadeOut": SubResource("Animation_0s72s"),
+"RESET": SubResource("Animation_fpi02")
+}
+
+[node name="Dialog" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_kc481")
+theme_override_font_sizes/font_size = 32
+autowrap_mode = 3
+visible_characters_behavior = 1
+script = ExtResource("1_h5j5u")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_u6a13")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x6ee7")
+}
