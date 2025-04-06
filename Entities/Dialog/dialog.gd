@@ -19,7 +19,7 @@ var texts = [
     {"text": "Reached the trench end", "depth": 10950}
 ]
 
-var text_index = 7
+var text_index = 0
 
 func _ready() -> void:
     animation_player.animation_finished.connect(animation_ended)

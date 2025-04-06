@@ -195,7 +195,7 @@ texture = SubResource("GradientTexture2D_j2337")
 position = Vector2(8895, 43822)
 
 [node name="Submarine" parent="." instance=ExtResource("1_gib7k")]
-position = Vector2(8895, 43000)
+position = Vector2(640, 0)
 
 [node name="Geometry" parent="." instance=ExtResource("2_ytqlx")]
 color = Color(0, 0, 0, 1)

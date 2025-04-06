@@ -15,38 +15,12 @@ func _physics_process(delta: float) -> void:
         return
     var direction := Input.get_vector("Left", "Right", "Up", "Down")
 
-    if direction.y > 0 && !is_diving:
-        is_diving = true
-        audio_stream_player.stream = preload("res://Sounds/water.wav")
-        audio_stream_player.play()
-
-    if is_on_floor():
-        direction = get_floor_normal()
-        velocity = direction * Constants.max_speed
-        if !audio_stream_player.playing:
-            audio_stream_player.stream = preload("res://Sounds/hit.wav")
-            audio_stream_player.play()
-
-    if global_position.x < Constants.left_play_area:
-        direction = Vector2(1.0, direction.y).normalized()
-        velocity.x = Constants.max_speed
-        if !dialog.is_playing:
-            dialog.display_text("The trench is on the other side")
-    elif global_position.x > Constants.right_play_area:
-        direction = Vector2(-1.0, direction.y).normalized()
-        velocity.x = - Constants.max_speed
-        if !dialog.is_playing:
-            dialog.display_text("The trench is on the other side")
+    handle_dive_start(direction)
+    direction = handle_collision(direction)
+    direction = handle_out_of_bounds(direction)
 
     if !is_diving && global_position.y == 0 && direction.y <= 0.0:
-         direction = Vector2(direction.x, 0.0)
-         velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), velocity.y)
-         if velocity.x > 0.0:
-            rotation = 0.0
-            scale = Vector2(1.0, 1.0)
-         elif velocity.x < 0.0:
-            rotation = - PI
-            scale = Vector2(1.0, -1.0)
+        direction = handle_surface_movement(direction, delta)
     elif global_position.y < 0.0:
         direction = Vector2(direction.x, 0.0)
         velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), velocity.y)
@@ -61,6 +35,45 @@ func _physics_process(delta: float) -> void:
     handle_light()
     
     $Label.text = "%s" % [floor(global_position.x)]
+
+func handle_dive_start(direction: Vector2) -> void:
+    if direction.y > 0 && !is_diving:
+        is_diving = true
+        audio_stream_player.stream = preload("res://Sounds/water.wav")
+        audio_stream_player.play()
+
+func handle_collision(direction: Vector2) -> Vector2:
+    if is_on_floor():
+        direction = get_floor_normal()
+        velocity = direction * Constants.max_speed
+        if !audio_stream_player.playing:
+            audio_stream_player.stream = preload("res://Sounds/hit.wav")
+            audio_stream_player.play()
+    return direction
+
+func handle_out_of_bounds(direction: Vector2) -> Vector2:
+    if global_position.x < Constants.left_play_area:
+        direction = Vector2(1.0, direction.y).normalized()
+        velocity.x = Constants.max_speed
+        if !dialog.is_playing:
+            dialog.display_text("The trench is on the other side")
+    elif global_position.x > Constants.right_play_area:
+        direction = Vector2(-1.0, direction.y).normalized()
+        velocity.x = - Constants.max_speed
+        if !dialog.is_playing:
+            dialog.display_text("The trench is on the other side")
+    return direction
+
+func handle_surface_movement(direction: Vector2, delta: float) -> Vector2:
+    direction = Vector2(direction.x, 0.0)
+    velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), velocity.y)
+    if velocity.x > 0.0:
+        rotation = 0.0
+        scale = Vector2(1.0, 1.0)
+    elif velocity.x < 0.0:
+        rotation = - PI
+        scale = Vector2(1.0, -1.0)
+    return direction
 
 func hande_rotation_and_scale(direction: Vector2, delta: float) -> void:
     if (global_position.y == 0.0):
