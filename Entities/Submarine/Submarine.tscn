@@ -1,14 +1,115 @@
-[gd_scene load_steps=7 format=3 uid="uid://cd3cwy7bm1rle"]
+[gd_scene load_steps=19 format=3 uid="uid://cd3cwy7bm1rle"]
 
 [ext_resource type="Script" path="res://Entities/Submarine/submarine.gd" id="1_t4wht"]
 [ext_resource type="Texture2D" uid="uid://bs0bgsfokary1" path="res://Textures/submarine.png" id="1_uth5l"]
 [ext_resource type="Texture2D" uid="uid://bqijme8n4ex7w" path="res://Textures/Light.png" id="3_b0es2"]
+[ext_resource type="Texture2D" uid="uid://cgwby63uios3" path="res://Textures/propeller1.png" id="4_87u3u"]
 [ext_resource type="Script" path="res://Entities/Submarine/camera_2d.gd" id="4_nwbhi"]
 [ext_resource type="Texture2D" uid="uid://rhx1vmo4vx1j" path="res://Textures/Beam.png" id="4_pm8hu"]
+[ext_resource type="Texture2D" uid="uid://x7f23x2ycmb" path="res://Textures/propeller2.png" id="5_m8dff"]
+[ext_resource type="Texture2D" uid="uid://byvoum1j0vlpl" path="res://Textures/propeller3.png" id="6_fq57p"]
+[ext_resource type="Texture2D" uid="uid://kil4x1pt0dj2" path="res://Textures/propeller4.png" id="7_j1f5o"]
+[ext_resource type="Texture2D" uid="uid://rae6lo6r41pc" path="res://Textures/bubble.png" id="10_brvav"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8l2s"]
 radius = 8.0
 height = 46.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68x8i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_87u3u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_m8dff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fq57p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_j1f5o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_xusbl"]
+resource_name = "Default"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/BeamLight2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.261799, -0.261799]
+}
+
+[sub_resource type="Animation" id="Animation_abwhu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/BeamLight2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v2vrs"]
+_data = {
+"Default": SubResource("Animation_xusbl"),
+"RESET": SubResource("Animation_abwhu")
+}
+
+[sub_resource type="Animation" id="Animation_p6bgx"]
+resource_name = "Default"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_olx5f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cke74"]
+_data = {
+"Default": SubResource("Animation_p6bgx"),
+"RESET": SubResource("Animation_olx5f")
+}
 
 [node name="Submarine" type="CharacterBody2D"]
 collision_layer = 0
@@ -28,6 +129,10 @@ energy = 0.0
 shadow_enabled = true
 texture = ExtResource("4_pm8hu")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+sprite_frames = SubResource("SpriteFrames_68x8i")
+frame_progress = 0.708609
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_nwbhi")
 
@@ -42,3 +147,24 @@ shadow_enabled = true
 texture = ExtResource("3_b0es2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-29, 5)
+emitting = false
+texture = ExtResource("10_brvav")
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v2vrs")
+}
+autoplay = "Default"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cke74")
+}
+autoplay = "Default"

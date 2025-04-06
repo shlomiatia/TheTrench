@@ -6,15 +6,28 @@ class_name Submarine extends CharacterBody2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var dialog: Dialog = $/root/Game/CanvasLayer/Dialog
+@onready var animated_sprite_2d: AnimatedSprite2D = $Sprite2D/AnimatedSprite2D
+@onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
+@onready var animation_player2: AnimationPlayer = $AnimationPlayer2
 
 var is_diving = false
-var can_move = true
+var can_move = false
 var is_trapped = false
 
 func _physics_process(delta: float) -> void:
     if !can_move:
         return
     var direction := Input.get_vector("Left", "Right", "Up", "Down")
+    if direction == Vector2.ZERO && animated_sprite_2d.is_playing():
+        animated_sprite_2d.pause()
+        cpu_particles_2d.emitting = false
+        animation_player2.play("Default")
+    elif direction != Vector2.ZERO:
+        if !animated_sprite_2d.is_playing():
+            animated_sprite_2d.play("default")
+            animation_player2.pause()
+        if global_position.y > 100.0:
+            cpu_particles_2d.emitting = true
 
     handle_dive_start(direction)
     direction = handle_collision(direction)
