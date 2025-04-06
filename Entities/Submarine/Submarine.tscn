@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd3cwy7bm1rle"]
+[gd_scene load_steps=7 format=3 uid="uid://cd3cwy7bm1rle"]
 
 [ext_resource type="Script" path="res://Entities/Submarine/submarine.gd" id="1_t4wht"]
 [ext_resource type="Texture2D" uid="uid://bs0bgsfokary1" path="res://Textures/submarine.png" id="1_uth5l"]
 [ext_resource type="Texture2D" uid="uid://bqijme8n4ex7w" path="res://Textures/Light.png" id="3_b0es2"]
+[ext_resource type="Script" path="res://Entities/Submarine/camera_2d.gd" id="4_nwbhi"]
 [ext_resource type="Texture2D" uid="uid://rhx1vmo4vx1j" path="res://Textures/Beam.png" id="4_pm8hu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8l2s"]
@@ -28,6 +29,7 @@ shadow_enabled = true
 texture = ExtResource("4_pm8hu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_nwbhi")
 
 [node name="Label" type="Label" parent="."]
 visible = false

@@ -70,7 +70,7 @@ func _draw() -> void:
             skip[i] = true
 
 func _process(_delta: float) -> void:
-    if not animation_player.is_playing() && submarine.global_position.y > Constants.twilight_end:
+    if not animation_player.is_playing() && submarine.global_position.y > Constants.twilight_end && !submarine.is_trapped:
         ping(submarine.global_position)
 
     queue_redraw()

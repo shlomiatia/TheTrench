@@ -19,7 +19,7 @@ var texts = [
     {"text": "I've reached the trench opening", "depth": 6000},
     {"text": "I'm getting closer...", "depth": 7500},
     {"text": "I've reached 8,848m. As far from sea level as Everest", "depth": 8848},
-    {"text": "10,000m below sea level. Commercial airplanes cruise this altitude", "depth": 10000},
+    {"text": "10,000m below sea level. Commercial airplanes cruise at this altitude", "depth": 10000},
     {"text": "I made it! I'm the first person to see what's down here", "depth": 10950}
 ]
 
@@ -44,7 +44,6 @@ func _process(delta: float) -> void:
         display_next_text()
 
 func display_next_text() -> void:
-    prints(texts[text_index]["text"])
     display_text(texts[text_index]["text"])
     text_index = text_index + 1
     if text_index >= texts.size():

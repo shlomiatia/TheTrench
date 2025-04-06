@@ -10,7 +10,6 @@ class_name Submarine extends CharacterBody2D
 var is_diving = false
 var can_move = true
 var is_trapped = false
-var is_cthulhu = false
 
 func _physics_process(delta: float) -> void:
     if !can_move:

@@ -19,7 +19,9 @@ var screen_offsets: Array[Vector2] = [
     Vector2(-width, height),
     Vector2(0.0, height),
     Vector2(width, height),
-    Vector2(width, 0.0),
+    Vector2(-width, height * 2),
+    Vector2(0.0, height * 2),
+    Vector2(width, height * 2),
 ]
 
 func _ready() -> void:
