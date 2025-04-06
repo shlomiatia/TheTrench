@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs0bgsfokary1"
-path="res://.godot/imported/submarine.png-623106d821b8453d3c5fe7d039693e4a.ctex"
+uid="uid://kr13hgrxwekp"
+path="res://.godot/imported/fish3.png-37f6681f307f11b09e31effa952e73a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/submarine.png"
-dest_files=["res://.godot/imported/submarine.png-623106d821b8453d3c5fe7d039693e4a.ctex"]
+source_file="res://Textures/fish3.png"
+dest_files=["res://.godot/imported/fish3.png-37f6681f307f11b09e31effa952e73a0.ctex"]
 
 [params]
 
