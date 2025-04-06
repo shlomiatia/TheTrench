@@ -1,10 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://dtdlxrbpbm0o1"]
+[gd_scene load_steps=19 format=3 uid="uid://dtdlxrbpbm0o1"]
 
 [ext_resource type="Script" path="res://Entities/Game/game.gd" id="1_eymi4"]
 [ext_resource type="PackedScene" uid="uid://cd3cwy7bm1rle" path="res://Entities/Submarine/Submarine.tscn" id="1_gib7k"]
+[ext_resource type="Texture2D" uid="uid://dxrwetuw1q8ft" path="res://Textures/cloud1.png" id="2_dtbsc"]
 [ext_resource type="PackedScene" uid="uid://dtd10ov6143xe" path="res://Entities/SpawnFish/SpawnFish.tscn" id="2_epefs"]
 [ext_resource type="PackedScene" uid="uid://btg8odlgpiln0" path="res://Entities/Geometry/Geometry.tscn" id="2_ytqlx"]
+[ext_resource type="Texture2D" uid="uid://cat4rk5kqj7d1" path="res://Textures/cloud2.png" id="3_2iioh"]
 [ext_resource type="PackedScene" uid="uid://dqt4yl7l4330w" path="res://Entities/Sonar/Sonar.tscn" id="3_6p7tm"]
+[ext_resource type="Texture2D" uid="uid://bmktr2wnh874b" path="res://Textures/cloud3.png" id="4_h2thc"]
 [ext_resource type="PackedScene" uid="uid://ww5pt2cdukcn" path="res://Entities/Measurements/Measurements.tscn" id="4_ouh1b"]
 [ext_resource type="FontFile" uid="uid://7gtb4py1cha5" path="res://Fonts/advanced_pixel-7.ttf" id="5_0tvjc"]
 [ext_resource type="PackedScene" uid="uid://dfhl4ptsutwcf" path="res://Entities/Dialog/Dialog.tscn" id="5_jvhip"]
@@ -112,6 +115,57 @@ texture_filter = 2
 offset_top = -360.0
 offset_right = 10400.0
 texture = SubResource("GradientTexture1D_ydgye")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(345, -93)
+texture = ExtResource("2_dtbsc")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(896, -95)
+texture = ExtResource("2_dtbsc")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(686, -141)
+texture = ExtResource("2_dtbsc")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(629, -113)
+texture = ExtResource("2_dtbsc")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(242, -85)
+texture = ExtResource("4_h2thc")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(899, -111)
+texture = ExtResource("4_h2thc")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(622, -99)
+texture = ExtResource("4_h2thc")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(352, -197)
+texture = ExtResource("3_2iioh")
+
+[node name="Sprite2D12" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(927, -103)
+texture = ExtResource("3_2iioh")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(697, -135)
+texture = ExtResource("3_2iioh")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(534, -115)
+texture = ExtResource("3_2iioh")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(21, -143)
+texture = ExtResource("4_h2thc")
 
 [node name="Ocean" type="TextureRect" parent="."]
 texture_filter = 2

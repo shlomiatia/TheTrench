@@ -4,7 +4,8 @@ class_name Fish extends CharacterBody2D
 var speed: float
 var direction: Vector2
 
-@onready var sprite2d = $Sprite2D
+@onready var sprite2d: Sprite2D = $Sprite2D
+@onready var point_light_2d: PointLight2D = $Sprite2D/PointLight2D
 
 func _ready() -> void:
     sprite2d.texture = texture
@@ -13,6 +14,14 @@ func _ready() -> void:
         direction = Vector2(-1.0, 0)
     else:
         direction = Vector2(1.0, 0.0)
+    if sprite2d.texture.resource_path.contains("fish4"):
+        point_light_2d.position = Vector2(-12, -5)
+    elif sprite2d.texture.resource_path.contains("fish5"):
+        point_light_2d.position = Vector2(-5, 0)
+    elif sprite2d.texture.resource_path.contains("fish6"):
+        point_light_2d.position = Vector2(-7, 0)
+    else:
+        point_light_2d.queue_free()
 
 func _physics_process(_delta: float) -> void:
     velocity = direction * speed
