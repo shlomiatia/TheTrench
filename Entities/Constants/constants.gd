@@ -2,13 +2,17 @@ extends Node2D
 
 # Mariana tenrch is 11km, and the journey took 2.5 h
 # 11000/2.5/60 = 73
-# 1m = 4 pixels
+var pixels_per_meter: float = 4.0
 var max_speed: float = 292.0 # 73 m/s
 var acceleration: float = 146.0
 var deceleration: float = 584.0
 var rotation_speed = 90.0
 var twilight_start: float = 1600.0 # 200m * 8
 var twilight_end: float = 8000.0 # 1000m * 8
+var fish_min_speed: float = 20.0
+var fish_max_speed: float = 40.0
+var left_play_area: float = 400;
+var right_play_area: float = 20000;
 
 var canvas_layer: CanvasLayer
 var display_label: Label
@@ -25,7 +29,9 @@ func _ready():
         "max_speed",
         "acceleration",
         "deceleration",
-        "rotation_speed"
+        "rotation_speed",
+        "fish_min_speed",
+        "fish_max_speed"
     ]
     
     setup_ui()

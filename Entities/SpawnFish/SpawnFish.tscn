@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtd10ov6143xe"]
+
+[ext_resource type="Script" path="res://Entities/SpawnFish/spawn_fish.gd" id="1_a3lkt"]
+
+[node name="SpawnFish" type="Node2D"]
+script = ExtResource("1_a3lkt")

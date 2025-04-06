@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtdlxrbpbm0o1"]
+[gd_scene load_steps=16 format=3 uid="uid://dtdlxrbpbm0o1"]
 
 [ext_resource type="Script" path="res://Entities/Game/game.gd" id="1_eymi4"]
 [ext_resource type="PackedScene" uid="uid://cd3cwy7bm1rle" path="res://Entities/Submarine/Submarine.tscn" id="1_gib7k"]
+[ext_resource type="PackedScene" uid="uid://dtd10ov6143xe" path="res://Entities/SpawnFish/SpawnFish.tscn" id="2_epefs"]
 [ext_resource type="PackedScene" uid="uid://btg8odlgpiln0" path="res://Entities/Geometry/Geometry.tscn" id="2_ytqlx"]
 [ext_resource type="PackedScene" uid="uid://dqt4yl7l4330w" path="res://Entities/Sonar/Sonar.tscn" id="3_6p7tm"]
 [ext_resource type="PackedScene" uid="uid://ww5pt2cdukcn" path="res://Entities/Measurements/Measurements.tscn" id="4_ouh1b"]
@@ -16,7 +17,7 @@ gradient = SubResource("Gradient_4vc5h")
 
 [sub_resource type="Gradient" id="Gradient_vn08f"]
 offsets = PackedFloat32Array(0, 0.91, 0.98, 1)
-colors = PackedColorArray(0.243137, 0.231373, 0.396078, 1, 0.243137, 0.231373, 0.396078, 1, 0.219608, 0.34902, 0.701961, 1, 0.2, 0.533333, 0.870588, 1)
+colors = PackedColorArray(0.172549, 0.117647, 0.192157, 1, 0.172549, 0.117647, 0.192157, 1, 0.219608, 0.34902, 0.701961, 1, 0.2, 0.533333, 0.870588, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_uftau"]
 gradient = SubResource("Gradient_vn08f")
@@ -117,6 +118,8 @@ texture_filter = 2
 offset_right = 10400.0
 offset_bottom = 44360.0
 texture = SubResource("GradientTexture2D_uftau")
+
+[node name="SpawnFish" parent="." instance=ExtResource("2_epefs")]
 
 [node name="Submarine" parent="." instance=ExtResource("1_gib7k")]
 position = Vector2(640, 0)

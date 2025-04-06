@@ -27,12 +27,12 @@ func _physics_process(delta: float) -> void:
             audio_stream_player.stream = preload("res://Sounds/hit.wav")
             audio_stream_player.play()
 
-    if global_position.x < 400:
+    if global_position.x < Constants.left_play_area:
         direction = Vector2(1.0, direction.y).normalized()
         velocity.x = Constants.max_speed
         if !dialog.is_playing:
             dialog.display_text("The trench is on the other side")
-    elif global_position.x > 20000:
+    elif global_position.x > Constants.right_play_area:
         direction = Vector2(-1.0, direction.y).normalized()
         velocity.x = - Constants.max_speed
         if !dialog.is_playing:

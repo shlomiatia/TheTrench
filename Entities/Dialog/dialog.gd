@@ -27,6 +27,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     if visible_characters != -1 && visible_characters < text.length():
         timer += delta
+        @warning_ignore("narrowing_conversion")
         visible_characters = characters_per_second * timer
 
         audio_stream_player.pitch_scale = 1.0 + randf_range(-pitch_variation, pitch_variation)
@@ -35,7 +36,7 @@ func _process(delta: float) -> void:
             animation_player.play("FadeOut")
             is_playing = false
 
-    if text_index < texts.size() && texts[text_index]["depth"] < submarine.global_position.y / 4:
+    if text_index < texts.size() && texts[text_index]["depth"] < submarine.global_position.y / Constants.pixels_per_meter:
         display_text(texts[text_index]["text"])
         text_index = text_index + 1
 
