@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://ovki237iy72i"]
+
+[ext_resource type="PackedScene" uid="uid://ww5pt2cdukcn" path="res://Entities/Measurements/Measurements.tscn" id="1_4tm6g"]
+[ext_resource type="Script" path="res://Entities/Measurements/faulty_measurements.gd" id="1_7y14b"]
+[ext_resource type="StyleBox" uid="uid://8l2j0jg6rkrg" path="res://Entities/Measurements/panel.tres" id="1_kyqgi"]
+[ext_resource type="Theme" uid="uid://bctepfpor8lac" path="res://Entities/Measurements/font.tres" id="2_87nyc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ypyhe"]
+content_margin_left = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1s4uw"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+
+[node name="FaultyMeasurements" type="HFlowContainer"]
+offset_right = 69.0
+offset_bottom = 31.0
+script = ExtResource("1_7y14b")
+
+[node name="Measurements" parent="." instance=ExtResource("1_4tm6g")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Battery" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_kyqgi")
+
+[node name="Label" type="Label" parent="Battery"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_87nyc")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ypyhe")
+text = "Battery:"
+
+[node name="Value" type="Label" parent="Battery"]
+layout_mode = 2
+theme = ExtResource("2_87nyc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1s4uw")
+text = "72.6%"
+
+[node name="Oxygen" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_kyqgi")
+
+[node name="Label" type="Label" parent="Oxygen"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_87nyc")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ypyhe")
+text = "Oxygen:"
+
+[node name="Value" type="Label" parent="Oxygen"]
+layout_mode = 2
+theme = ExtResource("2_87nyc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1s4uw")
+text = "98.8%"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

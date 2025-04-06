@@ -18,5 +18,4 @@ func _process(delta: float) -> void:
     eyes_red.position = eyes_red.position + (target_position - eyes_red.position) * 1 * delta
 
 func awake() -> void:
-    print("awake")
     animation_player.play("OpenEyes")

@@ -9,6 +9,8 @@ class_name Submarine extends CharacterBody2D
 
 var is_diving = false
 var can_move = true
+var is_trapped = false
+var is_cthulhu = false
 
 func _physics_process(delta: float) -> void:
     if !can_move:
@@ -62,6 +64,11 @@ func handle_out_of_bounds(direction: Vector2) -> Vector2:
         velocity.x = - Constants.max_speed
         if !dialog.is_playing:
             dialog.display_text("The trench is on the other side")
+    elif is_trapped && global_position.y < 43650:
+        direction = Vector2(direction.x, 1.0).normalized()
+        velocity.y = Constants.max_speed
+        if !dialog.is_playing:
+            dialog.display_text("I can't get out!")
     return direction
 
 func handle_surface_movement(direction: Vector2, delta: float) -> Vector2:

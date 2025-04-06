@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://cat4rk5kqj7d1" path="res://Textures/cloud2.png" id="3_2iioh"]
 [ext_resource type="PackedScene" uid="uid://dqt4yl7l4330w" path="res://Entities/Sonar/Sonar.tscn" id="3_6p7tm"]
 [ext_resource type="Texture2D" uid="uid://bmktr2wnh874b" path="res://Textures/cloud3.png" id="4_h2thc"]
-[ext_resource type="PackedScene" uid="uid://ww5pt2cdukcn" path="res://Entities/Measurements/Measurements.tscn" id="4_ouh1b"]
 [ext_resource type="FontFile" uid="uid://7gtb4py1cha5" path="res://Fonts/advanced_pixel-7.ttf" id="5_0tvjc"]
 [ext_resource type="PackedScene" uid="uid://dfhl4ptsutwcf" path="res://Entities/Dialog/Dialog.tscn" id="5_jvhip"]
 [ext_resource type="PackedScene" uid="uid://cgk72ry3wkbxd" path="res://Entities/Cthulhu/Cthulhu.tscn" id="7_6wc7f"]
+[ext_resource type="PackedScene" uid="uid://ovki237iy72i" path="res://Entities/Measurements/FaultyMeasurements.tscn" id="12_0kegk"]
 
 [sub_resource type="Gradient" id="Gradient_4vc5h"]
 colors = PackedColorArray(0.211765, 0.772549, 0.956863, 1, 0.427451, 0.917647, 0.839216, 1)
@@ -169,7 +169,7 @@ position = Vector2(697, -135)
 texture = ExtResource("3_2iioh")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Parallax2D"]
-position = Vector2(534, -115)
+position = Vector2(590, -157)
 texture = ExtResource("3_2iioh")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Parallax2D"]
@@ -199,21 +199,11 @@ position = Vector2(640, 0)
 
 [node name="Geometry" parent="." instance=ExtResource("2_ytqlx")]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(1600, 1600, 3200, 20800, 4800, 22400, 8740, 24000, 8776, 43646, 8745, 43684, 8719, 43744, 8701, 43813, 8728, 43893, 8755, 43949, 8775, 43981, 8834, 43994, 8909, 44001, 8981, 43997, 9023, 43981, 9054, 43940, 9078, 43869, 9088, 43808, 9073, 43751, 9041, 43689, 8994, 43656, 9060, 24000, 9801, 6848, 10244, 5651, 10400, 24000, 10400, 44360, 0, 44360, 0, 1200)
+polygon = PackedVector2Array(1600, 1600, 1632, 2819, 1816, 4066, 1868, 5424, 1800, 6719, 2027, 7562, 2015, 8485, 2215, 9564, 2427, 10495, 2269, 13095, 2844, 15789, 2724, 18327, 3200, 20800, 4800, 22400, 6132, 23024, 7437, 23384, 8740, 24000, 8776, 43646, 8745, 43684, 8719, 43744, 8701, 43813, 8728, 43893, 8755, 43949, 8775, 43981, 8834, 43994, 8909, 44001, 8981, 43997, 9023, 43981, 9054, 43940, 9078, 43869, 9088, 43808, 9073, 43751, 9041, 43689, 8994, 43656, 9060, 24000, 9228, 16935, 9659, 11912, 9801, 6848, 10244, 5651, 10400, 24000, 10400, 44360, 0, 44360, 0, 1200, 509, 1293, 1029, 1481)
 
 [node name="Sonar" parent="." instance=ExtResource("3_6p7tm")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Measurements" parent="CanvasLayer" instance=ExtResource("4_ouh1b")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -85.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 41.0
-grow_horizontal = 0
 
 [node name="Dialog" parent="CanvasLayer" instance=ExtResource("5_jvhip")]
 offset_left = 10.0
@@ -221,6 +211,16 @@ offset_top = 10.0
 offset_right = -94.0
 offset_bottom = 10.0
 autowrap_mode = 2
+
+[node name="FaultyMeasurements" parent="CanvasLayer" instance=ExtResource("12_0kegk")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -79.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 41.0
+grow_horizontal = 0
 
 [node name="Logo" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)

@@ -10,13 +10,17 @@ var is_playing: bool = false
 @onready var submarine: Submarine = $/root/Game/Submarine
 
 var texts = [
-    {"text": "Reached 900m, the height of Burj khalifa", "depth": 900},
-    {"text": "Reached 1,800m, the depth of the Grand Canyon", "depth": 1800},
-    {"text": "Reached 3,800m, the depth of the Titanic wreck", "depth": 3800},
-    {"text": "Reached the trench opening", "depth": 6000},
-    {"text": "Reached 8,848m, the height of mount Everest", "depth": 8848},
-    {"text": "Reached 10,000m, commercial airplanes cruise at this height", "depth": 10000},
-    {"text": "Reached the trench end", "depth": 10950}
+    {"text": "Nearly 11,000 meters below sea level at its lowest point, the Marianna Trench is the deepest oceanic trench known to humans", "depth": 0},
+    {"text": "I'm going to be the first person to explore it!", "depth": 0},
+    {"text": "900m below sea level. That’s equivalent to the height of the world’s tallest building, the Burj Khalifa", "depth": 900},
+    {"text": "1,800m below sea level. That’s the maximum depth of the Grand Canyon", "depth": 1800},
+    {"text": "3,800m. That’s the depth they found the Titanic wreck at", "depth": 3800},
+    {"text": "The trench should be close now...", "depth": 5000},
+    {"text": "I've reached the trench opening", "depth": 6000},
+    {"text": "I'm getting closer...", "depth": 7500},
+    {"text": "I've reached 8,848m. As far from sea level as Everest", "depth": 8848},
+    {"text": "10,000m below sea level. Commercial airplanes cruise this altitude", "depth": 10000},
+    {"text": "I made it! I'm the first person to see what's down here", "depth": 10950}
 ]
 
 var text_index = 0
@@ -36,9 +40,15 @@ func _process(delta: float) -> void:
             animation_player.play("FadeOut")
             is_playing = false
 
-    if text_index < texts.size() && texts[text_index]["depth"] < submarine.global_position.y / Constants.pixels_per_meter:
-        display_text(texts[text_index]["text"])
-        text_index = text_index + 1
+    if text_index < texts.size() && texts[text_index]["depth"] != 0 && texts[text_index]["depth"] < submarine.global_position.y / Constants.pixels_per_meter:
+        display_next_text()
+
+func display_next_text() -> void:
+    prints(texts[text_index]["text"])
+    display_text(texts[text_index]["text"])
+    text_index = text_index + 1
+    if text_index >= texts.size():
+        submarine.is_trapped = true
 
 func display_text(test_to_display: String) -> void:
     is_playing = true
@@ -48,10 +58,11 @@ func display_text(test_to_display: String) -> void:
     animation_player.play("RESET")
 
 func animation_ended(anim: String):
-    prints(anim, text_index)
     if anim != "RESET":
-        if text_index == 0:
+        if text_index == 1:
+            display_next_text()
+        elif text_index == 2:
             $/root/Game.continue_intro()
         elif text_index == texts.size():
-            print($/root/Game/Cthulhu)
             $/root/Game/Cthulhu.awake()
+            text_index = text_index + 1
