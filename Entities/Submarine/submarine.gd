@@ -16,6 +16,8 @@ var is_trapped = false
 
 func _physics_process(delta: float) -> void:
     if !can_move:
+        sprite_2d.material.set_shader_parameter("y_threshold", (15 - sprite_2d.position.y) / 30.0)
+        animated_sprite_2d.material.set_shader_parameter("y_threshold", (15 - sprite_2d.position.y) / 30.0)
         return
     var direction := Input.get_vector("Left", "Right", "Up", "Down")
     if direction == Vector2.ZERO && animated_sprite_2d.is_playing():
@@ -55,6 +57,8 @@ func handle_dive_start(direction: Vector2) -> void:
         is_diving = true
         audio_stream_player.stream = preload("res://Sounds/water.wav")
         audio_stream_player.play()
+        sprite_2d.material.set_shader_parameter("y_threshold", 1.0)
+        animated_sprite_2d.material.set_shader_parameter("y_threshold", 1.0)
 
 func handle_collision(direction: Vector2) -> Vector2:
     if is_on_floor():

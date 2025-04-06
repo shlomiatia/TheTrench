@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cd3cwy7bm1rle"]
+[gd_scene load_steps=22 format=3 uid="uid://cd3cwy7bm1rle"]
 
 [ext_resource type="Script" path="res://Entities/Submarine/submarine.gd" id="1_t4wht"]
 [ext_resource type="Texture2D" uid="uid://bs0bgsfokary1" path="res://Textures/submarine.png" id="1_uth5l"]
@@ -9,11 +9,20 @@
 [ext_resource type="Texture2D" uid="uid://x7f23x2ycmb" path="res://Textures/propeller2.png" id="5_m8dff"]
 [ext_resource type="Texture2D" uid="uid://byvoum1j0vlpl" path="res://Textures/propeller3.png" id="6_fq57p"]
 [ext_resource type="Texture2D" uid="uid://kil4x1pt0dj2" path="res://Textures/propeller4.png" id="7_j1f5o"]
+[ext_resource type="Shader" path="res://Entities/Submarine/Submarine.gdshader" id="9_mskfw"]
 [ext_resource type="Texture2D" uid="uid://rae6lo6r41pc" path="res://Textures/bubble.png" id="10_brvav"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8l2s"]
 radius = 8.0
 height = 46.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uyjw"]
+shader = ExtResource("9_mskfw")
+shader_parameter/y_threshold = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74eos"]
+shader = ExtResource("9_mskfw")
+shader_parameter/y_threshold = 0.5
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68x8i"]
 animations = [{
@@ -87,7 +96,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(1, 3),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector2(0, 1), Vector2(0, -2)]
+"values": [Vector2(0, 1), Vector2(0, -1)]
 }
 
 [sub_resource type="Animation" id="Animation_olx5f"]
@@ -122,6 +131,7 @@ shape = SubResource("CapsuleShape2D_i8l2s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_6uyjw")
 texture = ExtResource("1_uth5l")
 
 [node name="BeamLight2D" type="PointLight2D" parent="Sprite2D"]
@@ -130,8 +140,9 @@ shadow_enabled = true
 texture = ExtResource("4_pm8hu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+material = SubResource("ShaderMaterial_74eos")
 sprite_frames = SubResource("SpriteFrames_68x8i")
-frame_progress = 0.708609
+frame_progress = 0.185884
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_nwbhi")
