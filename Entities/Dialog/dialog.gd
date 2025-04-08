@@ -3,6 +3,7 @@ class_name Dialog extends Label
 const pitch_variation: float = 0.1
 const characters_per_second: int = 30
 var timer: float = 0.0
+var audio_timer: float = 0.0
 var is_playing: bool = false
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
@@ -31,11 +32,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     if visible_characters != -1 && visible_characters < text.length():
         timer += delta
+        audio_timer += delta
         @warning_ignore("narrowing_conversion")
         visible_characters = characters_per_second * timer
 
-        audio_stream_player.pitch_scale = 1.0 + randf_range(-pitch_variation, pitch_variation)
-        audio_stream_player.play()
+        var type_sounds_per_second: float = Constants.type_sounds_per_second / 1000.0
+        if (audio_timer > type_sounds_per_second):
+            audio_timer = audio_timer - type_sounds_per_second
+            audio_stream_player.pitch_scale = 1.0 + randf_range(-pitch_variation, pitch_variation)
+            audio_stream_player.play()
         if visible_characters >= text.length() && !animation_player.is_playing():
             animation_player.play("FadeOut")
             is_playing = false
@@ -54,6 +59,7 @@ func display_text(test_to_display: String) -> void:
     text = test_to_display
     visible_characters = 0
     timer = 0.0
+    audio_timer = 0.0
     animation_player.play("RESET")
 
 func animation_ended(anim: String):

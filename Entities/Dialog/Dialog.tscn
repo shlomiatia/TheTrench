@@ -43,13 +43,15 @@ _data = {
 }
 
 [node name="Dialog" type="Label"]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("1_kc481")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 autowrap_mode = 3
 visible_characters_behavior = 1
 script = ExtResource("1_h5j5u")

@@ -13,6 +13,7 @@ var fish_min_speed: float = 20.0
 var fish_max_speed: float = 40.0
 var left_play_area: float = 400;
 var right_play_area: float = 10000;
+var type_sounds_per_second: float = 100
 
 var canvas_layer: CanvasLayer
 var display_label: Label
@@ -26,12 +27,13 @@ func _ready():
     if is_disabled:
         return
     properties = [
+        "type_sounds_per_second",
         "max_speed",
         "acceleration",
         "deceleration",
         "rotation_speed",
         "fish_min_speed",
-        "fish_max_speed"
+        "fish_max_speed",
     ]
     
     setup_ui()

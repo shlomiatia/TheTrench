@@ -142,7 +142,7 @@ texture = ExtResource("4_pm8hu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
 material = SubResource("ShaderMaterial_74eos")
 sprite_frames = SubResource("SpriteFrames_68x8i")
-frame_progress = 0.185884
+frame_progress = 0.0241506
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_nwbhi")
