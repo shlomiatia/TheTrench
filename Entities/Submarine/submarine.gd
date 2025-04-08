@@ -15,9 +15,10 @@ var can_move = false
 var is_trapped = false
 
 func _physics_process(delta: float) -> void:
-    if !can_move:
+    if !is_diving:
         sprite_2d.material.set_shader_parameter("y_threshold", (15 - sprite_2d.position.y) / 30.0)
         animated_sprite_2d.material.set_shader_parameter("y_threshold", (15 - sprite_2d.position.y) / 30.0)
+    if !can_move:
         return
     var direction := Input.get_vector("Left", "Right", "Up", "Down")
     if direction == Vector2.ZERO && animated_sprite_2d.is_playing():
@@ -35,17 +36,14 @@ func _physics_process(delta: float) -> void:
     direction = handle_collision(direction)
     direction = handle_out_of_bounds(direction)
 
-    if !is_diving && global_position.y == 0 && direction.y <= 0.0:
-        direction = handle_surface_movement(direction, delta)
-    elif global_position.y < 0.0:
+    if global_position.y < 0.0:
         direction = Vector2(direction.x, 0.0)
         velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), velocity.y)
         velocity += get_gravity() * delta
     else:
         velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), get_velocity_component(direction.y, velocity.y, delta))
 
-    if is_diving:
-        hande_rotation_and_scale(direction, delta)
+    hande_rotation_and_scale(direction, delta)
 
     move_and_slide()
     handle_light()
@@ -90,19 +88,21 @@ func handle_out_of_bounds(direction: Vector2) -> Vector2:
 func handle_surface_movement(direction: Vector2, delta: float) -> Vector2:
     direction = Vector2(direction.x, 0.0)
     velocity = Vector2(get_velocity_component(direction.x, velocity.x, delta), velocity.y)
-    if velocity.x > 0.0:
-        rotation = 0.0
-        scale = Vector2(1.0, 1.0)
-    elif velocity.x < 0.0:
-        rotation = - PI
-        scale = Vector2(1.0, -1.0)
+
     return direction
 
 func hande_rotation_and_scale(direction: Vector2, delta: float) -> void:
-    if (global_position.y == 0.0):
-        return
     if direction == Vector2.ZERO:
         return
+    if velocity.y == 0.0 && (rotation == 0.0 || rotation_degrees == -180 || rotation_degrees == 180):
+        if velocity.x > 0.0:
+            rotation = 0.0
+            scale = Vector2(1.0, 1.0)
+        elif velocity.x < 0.0:
+            rotation = - PI
+            scale = Vector2(1.0, -1.0)
+        return
+
     var target_angle = direction.angle()
     var current_angle = rotation
     
