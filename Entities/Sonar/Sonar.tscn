@@ -79,3 +79,4 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_fovkg")
+volume_db = -10.0
