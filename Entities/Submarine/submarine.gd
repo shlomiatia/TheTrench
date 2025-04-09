@@ -18,6 +18,7 @@ func _physics_process(delta: float) -> void:
     if !is_diving:
         sprite_2d.material.set_shader_parameter("y_threshold", (15 - sprite_2d.position.y) / 30.0)
         animated_sprite_2d.material.set_shader_parameter("y_threshold", (15 - sprite_2d.position.y) / 30.0)
+    
     if !can_move:
         return
     var direction := Input.get_vector("Left", "Right", "Up", "Down")
@@ -32,6 +33,8 @@ func _physics_process(delta: float) -> void:
         if global_position.y > 100.0:
             cpu_particles_2d.emitting = true
 
+    if direction.y < 0 && !is_diving:
+        direction.y = 0
     handle_dive_start(direction)
     direction = handle_collision(direction)
     direction = handle_out_of_bounds(direction)
@@ -59,8 +62,8 @@ func handle_dive_start(direction: Vector2) -> void:
         animated_sprite_2d.material.set_shader_parameter("y_threshold", 1.0)
 
 func handle_collision(direction: Vector2) -> Vector2:
-    if is_on_floor():
-        direction = get_floor_normal()
+    if get_last_slide_collision() != null:
+        direction = get_last_slide_collision().get_normal()
         velocity = direction * Constants.max_speed
         if !audio_stream_player.playing:
             audio_stream_player.stream = preload("res://Sounds/hit.wav")
