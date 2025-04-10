@@ -21,6 +21,7 @@ func _physics_process(delta: float) -> void:
     
     if !can_move:
         return
+    
     var direction := Input.get_vector("Left", "Right", "Up", "Down")
     if direction == Vector2.ZERO && animated_sprite_2d.is_playing():
         animated_sprite_2d.pause()
