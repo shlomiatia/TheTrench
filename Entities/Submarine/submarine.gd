@@ -23,6 +23,8 @@ func _physics_process(delta: float) -> void:
         return
     
     var direction := Input.get_vector("Left", "Right", "Up", "Down")
+    if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+        direction = (get_global_mouse_position() - global_position).normalized()
     if direction == Vector2.ZERO && animated_sprite_2d.is_playing():
         animated_sprite_2d.pause()
         cpu_particles_2d.emitting = false

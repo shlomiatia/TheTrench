@@ -17,6 +17,6 @@ func allow_input() -> void:
     $/root/Game/Submarine.can_move = true
 
 func _input(event):
-    if !game_started && event is InputEventKey and event.pressed:
+    if !game_started && ((event is InputEventKey and event.pressed) || (event is InputEventMouseButton and event.is_pressed())):
         game_started = true
         dialog.display_next_text();
