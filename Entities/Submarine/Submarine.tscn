@@ -163,6 +163,7 @@ texture = ExtResource("3_b0es2")
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(-29, 5)
 emitting = false
+lifetime = 2.0
 texture = ExtResource("10_brvav")
 direction = Vector2(-1, 0)
 gravity = Vector2(0, 0)

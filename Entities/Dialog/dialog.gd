@@ -5,6 +5,7 @@ const characters_per_second: int = 30
 var timer: float = 0.0
 var audio_timer: float = 0.0
 var is_playing: bool = false
+var text_index = 0
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -24,7 +25,6 @@ var texts = [
     {"text": "I made it! I'm the first person to see what's down here", "depth": 10950}
 ]
 
-var text_index = 0
 
 func _ready() -> void:
     animation_player.animation_finished.connect(animation_ended)
@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
         display_next_text()
 
 func display_next_text() -> void:
+    prints("display_next_text")
     display_text(texts[text_index]["text"])
     text_index = text_index + 1
     if text_index >= texts.size():
@@ -63,6 +64,7 @@ func display_text(test_to_display: String) -> void:
     animation_player.play("RESET")
 
 func animation_ended(anim: String):
+    prints("animation_ended", anim)
     if anim != "RESET":
         if text_index == 1:
             display_next_text()

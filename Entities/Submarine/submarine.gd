@@ -10,9 +10,9 @@ class_name Submarine extends CharacterBody2D
 @onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
 @onready var animation_player2: AnimationPlayer = $AnimationPlayer2
 
-var is_diving = false
-var can_move = false
-var is_trapped = false
+var is_diving: bool = false
+var can_move: bool = false
+var is_trapped: bool = false
 
 func _physics_process(delta: float) -> void:
     if !is_diving:
@@ -38,6 +38,7 @@ func _physics_process(delta: float) -> void:
 
     if direction.y < 0 && !is_diving:
         direction.y = 0
+
     handle_dive_start(direction)
     direction = handle_collision(direction)
     direction = handle_out_of_bounds(direction)

@@ -7,6 +7,7 @@ var game_started: bool = false
 
 func _ready() -> void:
     pass
+
 func _process(_delta: float) -> void:
     pass
 
@@ -17,6 +18,15 @@ func allow_input() -> void:
     $/root/Game/Submarine.can_move = true
 
 func _input(event):
-    if !game_started && ((event is InputEventKey and event.pressed) || (event is InputEventMouseButton and event.is_pressed())):
-        game_started = true
-        dialog.display_next_text();
+    if (event is InputEventKey and event.is_pressed() and !event.is_echo()) || (event is InputEventMouseButton and event.is_pressed()):
+        if !game_started:
+            game_started = true
+            dialog.display_next_text();
+        if dialog.text_index < 3:
+            if dialog.animation_player.is_playing():
+                dialog.animation_player.seek(3.999)
+            else:
+                dialog.timer = 999.0
+        if animation_player.is_playing():
+            animation_player.seek(2.999)
+            allow_input()
