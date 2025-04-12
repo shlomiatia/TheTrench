@@ -14,7 +14,7 @@ var text_index = 0
 var texts = [
     {"text": "Nearly 11,000 meters below sea level at its lowest point, the Marianna Trench is the deepest oceanic trench known to humans", "depth": 0},
     {"text": "I'm going to be the first person to explore it!", "depth": 0},
-    {"text": "900m below sea level. That’s equivalent to the height of the world’s tallest building, the Burj Khalifa", "depth": 900},
+    {"text": "830m below sea level. That’s equivalent to the height of the world’s tallest building, the Burj Khalifa", "depth": 830},
     {"text": "1,800m below sea level. That’s the maximum depth of the Grand Canyon", "depth": 1800},
     {"text": "3,800m. That’s the depth they found the Titanic wreck at", "depth": 3800},
     {"text": "The trench should be close now...", "depth": 5000},
@@ -49,7 +49,6 @@ func _process(delta: float) -> void:
         display_next_text()
 
 func display_next_text() -> void:
-    prints("display_next_text")
     display_text(texts[text_index]["text"])
     text_index = text_index + 1
     if text_index >= texts.size():
@@ -64,7 +63,6 @@ func display_text(test_to_display: String) -> void:
     animation_player.play("RESET")
 
 func animation_ended(anim: String):
-    prints("animation_ended", anim)
     if anim != "RESET":
         if text_index == 1:
             display_next_text()

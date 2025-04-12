@@ -14,6 +14,7 @@ var fish_max_speed: float = 40.0
 var left_play_area: float = 400;
 var right_play_area: float = 10000;
 var type_sounds_per_second: float = 100
+var sonar_offset: float = 30.0
 
 var canvas_layer: CanvasLayer
 var display_label: Label
@@ -27,6 +28,7 @@ func _ready():
     if is_disabled:
         return
     properties = [
+        "sonar_offset",
         "type_sounds_per_second",
         "max_speed",
         "acceleration",

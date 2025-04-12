@@ -9,6 +9,7 @@ class_name Submarine extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $Sprite2D/AnimatedSprite2D
 @onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
 @onready var animation_player2: AnimationPlayer = $AnimationPlayer2
+@onready var camera_2d: Camera2D = $Camera2D
 
 var is_diving: bool = false
 var can_move: bool = false
@@ -35,6 +36,11 @@ func _physics_process(delta: float) -> void:
             animation_player2.pause()
         if global_position.y > 100.0:
             cpu_particles_2d.emitting = true
+
+    if direction.y > 0.0 && camera_2d.offset.y < 90.0:
+        camera_2d.offset.y = min(90.0, camera_2d.offset.y + 90 * delta)
+    elif direction.y <= 0.0 && camera_2d.offset.y > 0.0:
+        camera_2d.offset.y = max(0.0, camera_2d.offset.y - 90 * delta)
 
     if direction.y < 0 && !is_diving:
         direction.y = 0

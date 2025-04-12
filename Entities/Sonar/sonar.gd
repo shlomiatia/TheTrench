@@ -71,6 +71,6 @@ func _draw() -> void:
 
 func _process(_delta: float) -> void:
     if not animation_player.is_playing() && submarine.global_position.y > Constants.twilight_end && !submarine.is_trapped:
-        ping(submarine.global_position)
+        ping(submarine.global_position + submarine.velocity.normalized() * Constants.sonar_offset)
 
     queue_redraw()
