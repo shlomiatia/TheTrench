@@ -8,7 +8,7 @@ class_name Submarine extends CharacterBody2D
 @onready var dialog: Dialog = $/root/Game/CanvasLayer/Dialog
 @onready var animated_sprite_2d: AnimatedSprite2D = $Sprite2D/AnimatedSprite2D
 @onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
-@onready var animation_player2: AnimationPlayer = $AnimationPlayer2
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var camera_2d: Camera2D = $Camera2D
 
 var is_diving: bool = false
@@ -16,6 +16,7 @@ var can_move: bool = false
 var is_trapped: bool = false
 
 func _physics_process(delta: float) -> void:
+    print(sprite_2d.position)
     if !is_diving:
         sprite_2d.material.set_shader_parameter("y_threshold", (15 - sprite_2d.position.y) / 30.0)
         animated_sprite_2d.material.set_shader_parameter("y_threshold", (15 - sprite_2d.position.y) / 30.0)
@@ -29,18 +30,18 @@ func _physics_process(delta: float) -> void:
     if direction == Vector2.ZERO && animated_sprite_2d.is_playing():
         animated_sprite_2d.pause()
         cpu_particles_2d.emitting = false
-        animation_player2.play("Default")
+        animation_player.play("Default")
     elif direction != Vector2.ZERO:
         if !animated_sprite_2d.is_playing():
             animated_sprite_2d.play("default")
-            animation_player2.pause()
+            animation_player.pause()
         if global_position.y > 100.0:
             cpu_particles_2d.emitting = true
 
     if direction.y > 0.0 && camera_2d.offset.y < 90.0:
         camera_2d.offset.y = min(90.0, camera_2d.offset.y + 90 * delta)
     elif direction.y <= 0.0 && camera_2d.offset.y > 0.0:
-        camera_2d.offset.y = max(0.0, camera_2d.offset.y - 90 * delta)
+        camera_2d.offset.y = max(0.0, camera_2d.offset.y - 90 * delta / 4.0)
 
     if direction.y < 0 && !is_diving:
         direction.y = 0
